@@ -24,11 +24,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", {aboutContent: aboutContent});
+	res.render("about", { aboutContent: aboutContent });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", {contactContent: contactContent});
+	res.render("contact", { contactContent: contactContent });
 });
 
 app.listen(port, function () {
