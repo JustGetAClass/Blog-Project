@@ -4,7 +4,7 @@
 <p><%= startingContent %></p>
 <% posts.forEach(obj => { %>
 <h1><%= obj.blogtitle %></h1>
-<p><%= obj.blogbody %></p>
+<p><%= _.truncate(obj.blogbody, {'length': 100, 'separator': ' '}) %> <a href="/posts/<%= obj.blogtitle %>">Read More</a></p>
 <% }); %>
 
 <%- include('partials/footer.ejs') -%>
