@@ -1,7 +1,6 @@
 //jshint esversion:6
 
 const express = require("express");
-// const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
 const homeStartingContent =
@@ -14,13 +13,18 @@ const contactContent =
 const app = express();
 const port = 3000;
 
+let posts = [];
+
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-	res.render("home", { startingContent: homeStartingContent });
+	res.render("home", {
+		startingContent: homeStartingContent,
+		posts: posts,
+	});
 });
 
 app.get("/about", (req, res) => {
@@ -36,11 +40,21 @@ app.get("/compose", (req, res) => {
 });
 
 app.post("/compose", (req, res) => {
-	let post = {
+	const post = {
 		blogtitle: req.body.blogtitle,
 		blogbody: req.body.blogbody,
 	};
-  console.log(post);
+	posts.push(post);
+	res.redirect("/");
+});
+
+app.get("/posts/:postName", (req, res) => {
+	const requestedTitle = req.params.postName;
+	posts.forEach((post) => {
+		if (requestedTitle === post.blogtitle) {
+			console.log("Match Found!");
+		}
+	});
 });
 
 app.listen(port, function () {

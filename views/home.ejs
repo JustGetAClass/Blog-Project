@@ -2,5 +2,9 @@
 
 <h1>Home</h1>
 <p><%= startingContent %></p>
+<% posts.forEach(obj => { %>
+<h1><%= obj.blogtitle %></h1>
+<p><%= obj.blogbody %></p>
+<% }); %>
 
 <%- include('partials/footer.ejs') -%>
